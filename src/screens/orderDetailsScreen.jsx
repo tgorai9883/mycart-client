@@ -1,4 +1,4 @@
-import axios from "axios";
+import axiosInstance from "../config";
 import React, { useEffect, useState } from "react";
 import { Card, Col, Image, ListGroup, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
@@ -19,7 +19,7 @@ const OrderDetailsScreen = ({ match }) => {
 
     useEffect(() => {
         const addPaypalScript = async () =>{
-            const {data: clientId} = await axios.get("/config/paypal");
+            const {data: clientId} = await axiosInstance.get("/config/paypal");
             const script = document.createElement("script");
             script.type = "text/javascript";
             script.src = `https://www.paypal.com/sdk/js?client-id=${clientId}`;

@@ -1,6 +1,6 @@
-import axios from "axios";
+import axiosInstance from "../config";
 export const addToCart = (id,qty) => async(dispatch,getState) =>{
-    const {data} = await axios.get(`/products/${id}`);
+    const {data} = await axiosInstance.get(`/products/${id}`);
     dispatch({
         type: "CART_ADD_ITEM",
         payload: {

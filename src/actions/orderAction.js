@@ -1,4 +1,4 @@
-import axios from "axios";
+import axiosInstance from "../config";
 
 export const createOrder = (order) => async(dispatch,getState) => {
     try {
@@ -12,7 +12,7 @@ export const createOrder = (order) => async(dispatch,getState) => {
               Authorization: `Bearer ${userInfo.token}`,
             },
           };
-        const {data} = await axios.post("/orders",order,config);
+        const {data} = await axiosInstance.post("/orders",order,config);
         console.log(order);
         dispatch({type: "ORDER_CREATE_SUCCESS", payload: data});
     } catch(error) {
@@ -34,7 +34,7 @@ export const getOrderDetails = (id) => async(dispatch,getState) => {
               Authorization: `Bearer ${userInfo.token}`,
             },
           };
-        const {data} = await axios.get(`/orders/${id}`,config);
+        const {data} = await axiosInstance.get(`/orders/${id}`,config);
         console.log(data);
         dispatch({type: "ORDER_DETAILS_SUCCESS", payload: data});
     } catch(error) {
@@ -57,7 +57,7 @@ export const payOrder = (orderId, paymentResult) => async(dispatch,getState) => 
               Authorization: `Bearer ${userInfo.token}`,
             },
           };
-        const {data} = await axios.put(`/orders/${orderId}/pay`,paymentResult,config);
+        const {data} = await axiosInstance.put(`/orders/${orderId}/pay`,paymentResult,config);
         dispatch({type: "ORDER_PAY_SUCCESS", payload: data});
     } catch(error) {
         dispatch({
@@ -78,7 +78,7 @@ export const listMyOrders = () => async(dispatch,getState) => {
               Authorization: `Bearer ${userInfo.token}`,
             },
           };
-        const {data} = await axios.get("/orders/myorders",config);
+        const {data} = await axiosInstance.get("/orders/myorders",config);
         dispatch({type: "ORDER_LIST_SUCCESS", payload: data});
     } catch(error) {
         dispatch({
